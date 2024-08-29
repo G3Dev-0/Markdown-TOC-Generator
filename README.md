@@ -1,8 +1,8 @@
-# Markdown-TOC-Generator
+# Markdown Table of Contents Generator
 A simple tool to generate the table of contents for your Markdown file.
 
 **Table of Contents**
-+ [MarkdownTOCGenerator](#markdowntocgenerator)
++ [Markdown Table of Contents Generator](#markdown-table-of-contents-generator)
 	+ [How to use the tool](#how-to-use-the-tool)
 	+ [About](#about)
 
@@ -15,4 +15,4 @@ The the program will close.
 
 ## About
 Made by G3Dev
-v1.0.0 29082024
+v1.0.0 b29082024-1
