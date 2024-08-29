@@ -1,17 +1,12 @@
 from time import sleep as sleep
 import os.path as file
-import webbrowser
 
-INPUT_PATH = "md_toc_input.txt"
+INPUT_PATH = input("TYPE your input file path or DRAG here the input file, the press ENTER:\n")
 OUTPUT_PATH = "md_toc_output.txt"
 
 if not file.exists(INPUT_PATH):
-    print(f"Paste your Markdown content into '{INPUT_PATH}'")
-    # create file
-    with open(INPUT_PATH, "w") as f:
-        f.write("")
-    webbrowser.open(INPUT_PATH)
-    sleep(2.5)
+    print(f"File '{INPUT_PATH}' was not found")
+    sleep(5)
     quit()
 
 with open(INPUT_PATH, "r") as f:
@@ -48,8 +43,10 @@ for content in contents:
 tableOfContents = tableOfContents.strip()
 
 with open(OUTPUT_PATH, "w") as f:
+    f.write("**Table of Contents**\n")
     f.write(tableOfContents)
-print(f"Saved table of contents to '{OUTPUT_PATH}'\nThanks for using the tool. Have a nice day! :D")
+print(f"\nSaved table of contents to '{OUTPUT_PATH}'\nThanks for using the tool. Have a nice day! :D")
+import webbrowser
 webbrowser.open(OUTPUT_PATH)
-sleep(2.5)
+sleep(5)
 quit()
