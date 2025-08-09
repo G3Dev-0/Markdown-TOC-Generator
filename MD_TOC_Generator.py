@@ -14,25 +14,37 @@ with open(INPUT_PATH, "r") as f:
 
 contents = []
 
+"""
+'isInCodeBlock' is a flag used to handle scenarios where the markdown file contains a code snippet with a '#' in it.
+In that case the paragraph won't be registered
+"""
 isInCodeBlock = False
 
+# iterate for each line and register the paragraphs (identified by the '#')
 for line in lines:
+    # if the line starts with '#' and the current line is not part of any code snippet then it's a paragraph definition line
     if line.startswith("#") and not isInCodeBlock:
+        # counting the '#' chars to also memorize the heading level, thus enabling the TOC to also visualise nested paragraphs (subparagraphs)
         headingLevel = -1
         headingName = ""
         for char in line:
             if char == "#":
                 headingLevel += 1
             else:
+                # getting the paragraph name
                 headingName = line.replace("#", "").strip()
+                # append the paragraph data
                 contents.append((headingName, headingLevel))
+                # break from the 'chat in line' for loop and continue with the 'line in lines' for loop
                 break
+    # check if the current line starts a code snippet
     elif line.startswith("```"):
         isInCodeBlock = not isInCodeBlock
 
 import string
 specialChars = string.punctuation
 
+# build the table of contents based on the found paragraphs
 tableOfContents = ""
 for content in contents:
     tabs = "\t" * content[1]
@@ -42,6 +54,7 @@ for content in contents:
     tableOfContents += f"\n{tabs}+ [{headingName}](#{link})"
 tableOfContents = tableOfContents.strip()
 
+# write TOC to an output text file
 with open(OUTPUT_PATH, "w") as f:
     f.write("**Table of Contents**\n")
     f.write(tableOfContents)
